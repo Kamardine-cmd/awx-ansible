@@ -1,4 +1,4 @@
 Serveur: {{ ansible_hostname }}
 OS: {{ ansible_distribution }}
-IP: {{ ansible_default_ipv4_address }}
-RAM: {{ memtotal_mb}} MB
+IP: {{ ansible_default_ipv4.address }}
+RAM: {{ ansible_memtotal_mb}} MB
