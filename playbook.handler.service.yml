@@ -1,0 +1,22 @@
+---
+- name: Configuration d'un service avec handler
+  hosts: web
+  become: true
+
+  tasks:
+
+    - name: Créer un fichier de configuration
+      ansible.builtin.copy:
+        content: |
+          # Configuration de mon application.
+          application: web
+          environnement: production
+        dest: /tmp/mon_application.conf
+      notify: Redémarrer cron
+
+  handlers:
+
+    - name: Redémarrer cron
+      ansible.builtin.service:
+        name: cron
+        state: restarted
