@@ -1,0 +1,49 @@
+- name: Revision des facts
+  hosts: web
+  become: True
+  
+
+
+  tasks:
+
+    - name: Afficher les informations
+      ansible.builtin.debug:
+        msg:
+          - "Serveur : {{ ansible_hostname }}"
+          - "OS : {{ ansible_distribution }}"
+          - "IP : {{ ansible_default_ipv4.address }}"
+          - "RAM : {{ ansible_memtotal_mb }} MB"
+          - "CPU : {{ ansible_processor_vcpus }}"
+          - "Version: {{ ansible_distribution_version }}"
+          - "Kernel: {{ ansible_kernel }}"
+          
+
+
+
+
+
+# c'est le même resultat que celui qui est en bas
+
+
+
+  # tasks:
+  #   - name: Afficher le hostname
+  #     ansible.builtin.debug:
+  #       var: ansible_hostname
+
+
+  #   - name: Afficher le système
+  #     ansible.builtin.debug:
+  #       var: ansible_distribution
+
+
+  #   - name: Afficher la mémoire
+  #     ansible.builtin.debug:
+  #       var: ansible_memtotal_mb
+
+
+  #   - name: Afficher l'adresse IP
+  #     ansible.builtin.debug:
+  #       var: ansible_default_ipv4.address
+
+        

@@ -1,0 +1,13 @@
+- name: Tester group_vars et host_vars
+  hosts: web
+  become: true
+
+  tasks:
+
+    - name: Afficher les variables
+      ansible.builtin.debug:
+        msg:
+          - "Serveur : {{ inventory_hostname }}"
+          - "Environnement : {{ environnement }}"
+          - "Port HTTP : {{ port_http }}"
+          - "Message : {{ message }}"

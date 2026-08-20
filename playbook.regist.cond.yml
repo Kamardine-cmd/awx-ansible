@@ -1,0 +1,24 @@
+- name: Utiliser le résultat d'une commande
+  hosts: web
+  become: true
+
+  tasks:
+
+    - name: Récupérer le hostname
+      ansible.builtin.command:
+        cmd: hostname
+      register: resultat_hostname
+
+    - name: Afficher le hostname
+      ansible.builtin.debug:
+        msg: "Le serveur est {{ resultat_hostname.stdout }}"
+
+    - name: Message si c'est comore-worker
+      ansible.builtin.debug:
+        msg: "C'est bien le serveur attendu"
+      when: resultat_hostname.stdout == "comore-worker"
+
+    - name: Message si ce n'est pas comore-worker
+      ansible.builtin.debug:
+        msg: "ATTENTION : serveur inattendu"
+      when: resultat_hostname.stdout != "comore-worker"

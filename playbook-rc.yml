@@ -1,0 +1,25 @@
+- name: Vérifier le résultat d'une commande
+  hosts: web
+
+  tasks:
+
+    - name: Vérifier si le fichier existe
+      ansible.builtin.command:
+        cmd: test -f /tmp/message.txt
+      register: resultat_fichier
+      changed_when: false
+      failed_when: false
+
+    - name: Afficher le résultat
+      ansible.builtin.debug:
+        var: resultat_fichier.rc
+
+    - name: Fichier présent
+      ansible.builtin.debug:
+        msg: "Le fichier /tmp/message.txt existe"
+      when: resultat_fichier.rc == 0
+
+    - name: Fichier absent
+      ansible.builtin.debug:
+        msg: "Le fichier /tmp/message.txt est absent"
+      when: resultat_fichier.rc != 0

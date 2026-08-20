@@ -1,0 +1,16 @@
+- name: Utilisation de vars_files
+  hosts: web
+  become: true
+
+  vars_files:
+    - variables.yml
+
+  tasks:
+
+    - name: Afficher les variables
+      ansible.builtin.debug:
+        msg:
+          - "Paquet : {{ paquet }}"
+          - "Service : {{ service }}"
+          - "Port : {{ port_ssh }}"
+          - "Environnement : {{ environnement }}"

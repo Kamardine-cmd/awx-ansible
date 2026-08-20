@@ -1,0 +1,20 @@
+- name: Configuration avec handler
+  hosts: web
+  become: true
+
+  tasks:
+
+    - name: Créer la configuration
+      ansible.builtin.copy:
+        content: |
+          serveur=web01
+          environnement=production
+          port=9090
+        dest: /tmp/mon-serveur.conf
+      notify: Redémarrer le serveur
+
+  handlers:
+
+    - name: Redémarrer le serveur
+      ansible.builtin.debug:
+        msg: "La configuration a changé : redémarrage nécessaire"

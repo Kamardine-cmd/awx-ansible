@@ -1,0 +1,14 @@
+- name: Utilisation des variables de groupe
+  hosts: web
+  become: true
+
+
+  tasks:
+    - name: Installer curl
+      ansible.builtin.apt:
+        name:  "{{ paquet }}"
+        state: present
+
+    - name: Affichage de message
+      ansible.builtin.debug:
+        msg: "{{ message }}"

@@ -1,0 +1,25 @@
+- name: Utilisation de loop avec variable
+  hosts: web
+  become: True
+
+  vars:
+    outils:
+      - curl
+      - vim
+      - git
+      - tree
+      - htop
+
+  tasks:
+    - name: Installation des paquets avec variables
+      ansible.builtin.apt:
+        name:  "{{ item }}"
+        state: present
+
+      loop: "{{ outils }}"
+
+    - name: Debeugue des packages
+      ansible.builtin.debug:
+        msg: "Traitement de: {{ item }}"
+      
+      loop: "{{ outils }}"

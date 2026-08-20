@@ -1,0 +1,11 @@
+- name: Installation depuis une variable d'inventaire
+  hosts: web
+  become: True
+
+
+
+  tasks:
+    - name: Installer le paquet
+      ansible.builtin.apt:
+        name: "{{ paquet }}"
+        state: present

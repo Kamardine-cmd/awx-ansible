@@ -1,0 +1,3 @@
+environnement: production
+port_http: 80
+message: "Serveur web de production"

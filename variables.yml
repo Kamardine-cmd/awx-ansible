@@ -1,0 +1,5 @@
+paquet: curl
+service: ssh
+port_ssh: 22
+#environnement: production
+environnement: test

@@ -1,0 +1,11 @@
+- name: Tester la priorité
+  hosts: web
+
+  vars_files:
+    - variables.yml
+
+  tasks:
+
+    - name: Afficher environnement
+      ansible.builtin.debug:
+        msg: "Environnement = {{ environnement }}"

@@ -1,0 +1,17 @@
+- name: Premier exercice handlers
+  hosts: web
+  become: true
+
+  tasks:
+
+    - name: Créer un fichier
+      ansible.builtin.file:
+        path: /tmp/ansible-handler.txt
+        state: file
+      notify: Message du handler
+
+  handlers:
+
+    - name: Message du handler
+      ansible.builtin.debug:
+        msg: "Le handler a été déclenché !"

@@ -1,0 +1,30 @@
+- name : "Configuration des serveurs"
+  hosts: web
+  become: yes
+
+  vars:
+    paquet: "curl"
+    service: "ssh"
+
+
+
+  tasks:
+    - name: Installation de l'outil curl
+      ansible.builtin.apt:
+        name: "{{ paquet }}"
+        state: present
+      when: ansible_os == "Ubuntu"    # j'ai rajouté ça pour illustrer l'utilisation de la condition when
+          
+    - name: Démarrer SSH
+      ansible.builtin.service:
+        name: "{{ service }}"
+        state: started
+
+    - name: Créer un fichier message.txt
+      ansible.builtin.file:
+        path: /tmp/message.txt
+        state: touch
+
+   
+        
+

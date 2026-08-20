@@ -1,0 +1,26 @@
+- name: Premier exercice sur les loops
+  hosts: web
+  become: true
+
+
+  tasks:
+    - name: Installation des packages avec loop
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      loop:
+        - curl
+        - vim
+        - git
+        - tree
+        
+    - name: pour debeuguer les paquets
+      ansible.builtin.debug:
+        msg: "l'outil actuellement traité est :{{ item }}"
+      
+      loop:
+        - curl
+        - vim
+        - git
+        - tree

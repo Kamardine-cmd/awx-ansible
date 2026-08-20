@@ -1,0 +1,22 @@
+- name: Vérification de l'existence du fichier
+  hosts: web
+  become: true
+
+  tasks:
+
+    - name: Vérification du fichier message.txt
+      ansible.builtin.command:
+        cmd: test -f /tmp/message.txt
+      register: resultat_fichier
+      changed_when: false
+      failed_when: resultat_fichier.rc not in [0, 1]
+
+    - name: Résultat valide
+      ansible.builtin.debug:
+        msg: "Le résultat est acceptable"
+      when: resultat_fichier.rc in [0, 1]
+
+    - name: Résultat non valide
+      ansible.builtin.debug:
+        msg: "Le résultat est non acceptable"
+      when: resultat_fichier.rc not in [0, 1]

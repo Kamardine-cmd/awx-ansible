@@ -1,0 +1,14 @@
+- name: Decouvrir register
+  hosts: web
+  become: True
+
+  tasks:
+    - name: recuperer le hostname
+      ansible.builtin.command:
+        cmd: hostname
+      register: resultat_hostname
+
+    - name: Afficher le resultat_hostname
+      ansible.builtin.debug:
+        var: resultat_hostname
+
