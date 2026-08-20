@@ -1,0 +1,11 @@
+---
+- name: Premier exercice sur les templates
+  hosts: web
+  become: true
+
+  tasks:
+
+    - name: Générer le fichier de configuration
+      ansible.builtin.template:
+        src: templates/serveur.conf.j2
+        dest: /tmp/serveur.conf
